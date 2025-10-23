@@ -20,7 +20,7 @@
 <body class="h-full bg-gray-50 dark:bg-gray-900 font-sans antialiased">
     <div class="min-h-full">
         <!-- Navigation -->
-        @include('layouts.navigation')
+        {{-- @include('layouts.navigation') --}}
 
         <!-- Page Heading -->
         @if (isset($header))
@@ -32,7 +32,7 @@
         @endif
 
         <!-- Page Content -->
-        <main>
+        <main class="p-8">
             {{ $slot }}
         </main>
 

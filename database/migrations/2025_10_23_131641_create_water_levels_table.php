@@ -15,12 +15,17 @@ return new class extends Migration
             $table->id();
 
             $table->string('device_id')->index()->comment('Identifier for the transmitting NodeMCU/ESP8266.');
-
-            $table->float('level_cm')->comment('The measured water level in centimeters.');
-            
+            $table->decimal('level_cm', 8, 2)->comment('The measured water level in centimeters.');
             $table->json('raw_data')->nullable()->comment('Optional raw data payload from the sensor.');
+            $table->timestamp('timestamp')->nullable()->comment('Device timestamp if provided.');
+            $table->decimal('battery_level', 5, 2)->nullable()->comment('Device battery level percentage.');
+            $table->decimal('temperature', 5, 2)->nullable()->comment('Device temperature in Celsius.');
             
             $table->timestamps();
+
+            // Add indexes for better query performance
+            $table->index(['device_id', 'created_at']);
+            $table->index(['created_at']);
         });
     }
 

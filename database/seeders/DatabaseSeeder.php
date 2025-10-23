@@ -21,5 +21,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        // Seed water level data for testing
+        $this->call(WaterLevelSeeder::class);
     }
 }
