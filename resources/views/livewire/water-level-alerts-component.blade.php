@@ -5,7 +5,7 @@
                 <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Active Alerts</h2>
                 <div class="flex items-center space-x-2">
                     <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Threshold:</label>
-                    <select wire:model.live="alertThreshold" class="text-sm border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md">
+                    <select wire:model.live="alertThreshold" class="text-sm border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md p-2">
                         <option value="all">All</option>
                         <option value="critical">Critical</option>
                         <option value="moderate">Moderate</option>

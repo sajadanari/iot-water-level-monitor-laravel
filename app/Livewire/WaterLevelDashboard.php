@@ -14,9 +14,9 @@ class WaterLevelDashboard extends Component
     public $selectedDevice = 'all';
     public $timeRange = 24; // hours
     public $autoRefresh = true;
-    public $refreshInterval = 30; // seconds
+    public $refreshInterval = 5; // seconds
     public $showAlerts = true;
-    public $alertThreshold = 20; // percentage
+    public $alertThreshold = 'all'; // percentage
 
     protected $listeners = ['refreshData' => 'loadData'];
 
@@ -29,11 +29,16 @@ class WaterLevelDashboard extends Component
     {
         // This method will be called when data needs to be refreshed
         // The component will automatically re-render
+        $this->resetPage();
+        $this->dispatch('refreshAlerts');
     }
 
     public function updatedSelectedDevice()
     {
         $this->resetPage();
+        // Send event to the WaterLevelChart component
+        $this->dispatch('updateDevice', deviceId: $this->selectedDevice)
+            ->to(WaterLevelChart::class);
     }
 
     public function updatedTimeRange()

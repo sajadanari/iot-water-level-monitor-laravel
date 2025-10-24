@@ -1,17 +1,36 @@
 <div>
     <div class="mb-8">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-            <div>
-                <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Water Level Monitor</h1>
-                <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                    Real-time monitoring of water tank levels across all devices
-                </p>
+            <div class="flex flex-row items-center">
+
+                {{-- LOGO --}}
+                <div class="invisible mr-0 w-0 dark:visible dark:mr-4 dark:w-auto">
+                    <img class="" width="100pt" height="100pt" src="{{ asset('defaults/WL-Logo-Light-Color.svg') }}" alt="WaterLevelMonitor">
+                </div>
+
+                <div class="dark:invisible dark:mr-0 dark:w-0 mr-4">
+                    <img class="" width="100pt" height="100pt" src="{{ asset('defaults/WL-Logo-Main-Color.svg') }}" alt="WaterLevelMonitor">
+                </div>
+
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Water Level Monitor</h1>
+                    <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                        Real-time monitoring of water tank levels across all devices
+                    </p>
+
+                    {{-- Show Last Refresh --}}
+                    <div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">
+                            Last Refresh: {{ now()->format('H:i:s') }}
+                        </p>
+                    </div>
+                </div>
             </div>
 
             <div class="mt-4 sm:mt-0 flex flex-wrap gap-4">
                 <div class="flex items-center space-x-2">
                     <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Device:</label>
-                    <select wire:model.live="selectedDevice" class="rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white text-sm">
+                    <select wire:model.live="selectedDevice" class="rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white text-sm p-2">
                         <option value="all">All Devices</option>
                         @foreach($devices as $device)
                             <option value="{{ $device }}">{{ $device }}</option>
@@ -21,7 +40,7 @@
 
                 <div class="flex items-center space-x-2">
                     <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Period:</label>
-                    <select wire:model.live="timeRange" class="rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white text-sm">
+                    <select wire:model.live="timeRange" class="rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white text-sm p-2">
                         <option value="1">Last Hour</option>
                         <option value="6">Last 6 Hours</option>
                         <option value="24">Last 24 Hours</option>
@@ -181,7 +200,11 @@
 
     <div class="mb-8">
         {{-- The water-level-chart component should be fixed as per our previous conversation --}}
-        <livewire:water-level-chart :deviceId="$selectedDevice" :timeRange="$timeRange" />
+        <livewire:water-level-chart
+            :deviceId="$selectedDevice"
+            :timeRange="$timeRange"
+            wire:key="{{ $selectedDevice . '-' . $timeRange }}"
+        />
     </div>
 
     {{-- ADDED x-data="{}" to enable Alpine context for calling JS helper functions for the badge color --}}
