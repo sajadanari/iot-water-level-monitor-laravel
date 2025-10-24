@@ -28,11 +28,11 @@ class WaterLevelResource extends JsonResource
 
     /**
      * Calculate water level percentage based on tank capacity.
-     * Assuming a standard tank height of 200cm for percentage calculation.
+     * Assuming a standard tank height for percentage calculation.
      */
     private function calculatePercentage(): int
     {
-        $maxHeight = 200; // cm - adjust based on your tank specifications
+        $maxHeight = config('myapp.maxHeight'); // cm - adjust based on your tank specifications
         return min(100, max(0, round(($this->level_cm / $maxHeight) * 100)));
     }
 
@@ -42,7 +42,7 @@ class WaterLevelResource extends JsonResource
     private function getStatus(): string
     {
         $percentage = $this->calculatePercentage();
-        
+
         if ($percentage >= 80) {
             return 'excellent';
         } elseif ($percentage >= 60) {

@@ -20,15 +20,15 @@ class WaterLevelSeeder extends Seeder
             // Generate readings for the last 7 days
             for ($i = 0; $i < 168; $i++) { // 168 hours = 7 days
                 $timestamp = $now->copy()->subHours($i);
-                
+
                 // Simulate realistic water level patterns
                 $baseLevel = rand(30, 80);
                 $variation = rand(-10, 10);
-                $levelCm = max(0, min(200, $baseLevel + $variation));
-                
+                $levelCm = max(0, min(config('myapp.maxHeight'), $baseLevel + $variation));
+
                 // Simulate battery drain over time
                 $batteryLevel = max(10, 100 - ($i * 0.5) + rand(-5, 5));
-                
+
                 // Simulate temperature variations
                 $temperature = 20 + rand(-5, 15) + sin($i / 24) * 3;
 

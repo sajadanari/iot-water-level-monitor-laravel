@@ -71,7 +71,7 @@ class WaterLevelChart extends Component
 
     private function calculatePercentage($levelCm)
     {
-        $maxHeight = 200; // cm
+        $maxHeight = config('myapp.maxHeight'); // cm
         return min(100, max(0, round(($levelCm / $maxHeight) * 100)));
     }
 

@@ -105,7 +105,7 @@ class WaterLevel extends Model
 
     public function calculatePercentage($levelCm)
     {
-        $maxHeight = 200;
+        $maxHeight = config('myapp.maxHeight');
         return min(100, max(0, round(($levelCm / $maxHeight) * 100)));
     }
 

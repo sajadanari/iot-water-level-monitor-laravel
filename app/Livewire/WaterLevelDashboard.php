@@ -190,7 +190,7 @@ class WaterLevelDashboard extends Component
 
     private function calculatePercentage($levelCm)
     {
-        $maxHeight = 200; // cm - adjust based on your tank specifications
+        $maxHeight = config('myapp.maxHeight'); // cm - adjust based on your tank specifications
         return min(100, max(0, round(($levelCm / $maxHeight) * 100)));
     }
 
