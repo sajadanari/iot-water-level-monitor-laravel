@@ -32,7 +32,7 @@ Route::prefix('water-levels')->group(function () {
 // LED Control API Routes
 Route::prefix('led-commands')->group(function () {
     // Get the earliest not proccesed led control queue record for a specific device
-    Route::get('/get-command', [LedControllController::class, 'getCommand']);
+    Route::post('/get-command', [LedControllController::class, 'getCommand']);
 
     // Update the led control queue record as processed
     Route::post('/proccess-command', [LedControllController::class, 'processCommand']);
