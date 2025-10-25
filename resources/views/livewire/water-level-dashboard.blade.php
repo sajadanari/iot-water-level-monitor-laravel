@@ -268,6 +268,10 @@
         </x-card>
     </div>
 
+    <div>
+        <livewire:led-controll-component :devices="$devices"/>
+    </div>
+
     @if($autoRefresh)
         <script>
             setInterval(function() {
