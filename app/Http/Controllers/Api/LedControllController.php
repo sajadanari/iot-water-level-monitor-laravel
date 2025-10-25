@@ -28,7 +28,7 @@ class LedControllController extends Controller
         $queue = LedControllQueue::where('device_id', $validated['device_id'])
             ->notProcessed()
             ->orderBy('created_at', 'asc')
-            ->select('id', 'command')
+            ->select('id as queue_id', 'command')
             ->first();
 
         if (!$queue) {
